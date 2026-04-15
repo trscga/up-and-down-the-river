@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Up and Down the River</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ───── JOIN / CREATE SCREEN ───── -->
+  <div id="screen-lobby" class="screen active">
+    <div class="lobby-container">
+      <h1>🃏 Up &amp; Down the River</h1>
+      <p class="subtitle">A trick-taking card game for 2–6 players</p>
+
+      <div class="lobby-form">
+        <input type="text" id="input-name" placeholder="Your name" maxlength="20" autocomplete="off">
+
+        <div class="lobby-actions">
+          <button id="btn-create" class="btn btn-primary">Create Room</button>
+          <div class="divider">or</div>
+          <div class="join-row">
+            <input type="text" id="input-code" placeholder="Room code" maxlength="5" autocomplete="off">
+            <button id="btn-join" class="btn btn-secondary">Join</button>
+          </div>
+        </div>
+        <p id="lobby-error" class="error-msg"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── WAITING ROOM ───── -->
+  <div id="screen-waiting" class="screen">
+    <div class="waiting-container">
+      <h2>Room: <span id="room-code-display"></span></h2>
+      <p class="share-msg">Share this code with friends to join!</p>
+      <div id="player-list" class="player-list"></div>
+      <button id="btn-start" class="btn btn-primary" style="display:none;">Start Game</button>
+      <p id="waiting-msg" class="info-msg">Waiting for host to start...</p>
+    </div>
+  </div>
+
+  <!-- ───── GAME SCREEN ───── -->
+  <div id="screen-game" class="screen">
+    <div class="game-layout">
+      <!-- Top bar -->
+      <div class="top-bar">
+        <div class="round-info">
+          <span id="round-label"></span>
+          <span id="trump-display"></span>
+        </div>
+        <button id="btn-scoreboard" class="btn btn-small">Scoreboard</button>
+      </div>
+
+      <!-- Other players -->
+      <div id="other-players" class="other-players"></div>
+
+      <!-- Trick area -->
+      <div id="trick-area" class="trick-area">
+        <div id="trick-cards" class="trick-cards"></div>
+        <div id="trick-message" class="trick-message"></div>
+      </div>
+
+      <!-- Bidding area -->
+      <div id="bid-area" class="bid-area" style="display:none;">
+        <p class="bid-prompt">How many tricks will you win?</p>
+        <div id="bid-buttons" class="bid-buttons"></div>
+        <p id="bid-restriction" class="restriction-msg"></p>
+      </div>
+
+      <!-- My hand -->
+      <div class="my-hand-area">
+        <div class="my-info">
+          <span id="my-name"></span>
+          <span id="my-bid-display"></span>
+          <span id="my-tricks-display"></span>
+        </div>
+        <div id="my-hand" class="my-hand"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── ROUND END ───── -->
+  <div id="screen-round-end" class="screen">
+    <div class="round-end-container">
+      <h2 id="round-end-title"></h2>
+      <table id="round-end-table" class="score-table">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Bid</th>
+            <th>Tricks</th>
+            <th>Points</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h3 style="margin-top:20px;">Full Scoreboard</h3>
+      <div id="round-end-scoreboard" class="scoreboard-body"></div>
+
+      <button id="btn-next-round" class="btn btn-primary" style="display:none;margin-top:16px;">Next Round</button>
+      <p id="round-end-wait" class="info-msg">Waiting for host...</p>
+    </div>
+  </div>
+
+  <!-- ───── GAME OVER ───── -->
+  <div id="screen-game-over" class="screen">
+    <div class="game-over-container">
+      <h2>🏆 Game Over!</h2>
+      <div id="winner-display" class="winner-display"></div>
+      <table id="final-score-table" class="score-table">
+        <thead>
+          <tr><th>Place</th><th>Player</th><th>Score</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button id="btn-full-scoreboard" class="btn btn-small" style="margin-top:10px;">Full Scoreboard</button>
+      <button id="btn-play-again" class="btn btn-primary" style="display:none;">Play Again</button>
+    </div>
+  </div>
+
+  <!-- ───── SCOREBOARD MODAL ───── -->
+  <div id="scoreboard-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Scoreboard</h3>
+        <button id="btn-close-scoreboard" class="btn btn-small">✕</button>
+      </div>
+      <div id="scoreboard-body" class="scoreboard-body"></div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

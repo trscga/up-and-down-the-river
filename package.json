@@ -1,0 +1,14 @@
+{
+  "name": "up-and-down-the-river",
+  "version": "1.0.0",
+  "description": "Online multiplayer Up and Down the River card game for up to 6 players",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "uuid": "^9.0.0"
+  }
+}

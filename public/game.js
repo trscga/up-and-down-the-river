@@ -179,11 +179,23 @@ function renderGame(state) {
   dom.roundLabel.textContent = `Round ${state.roundNumber}/${state.totalRounds} · ${state.cardsThisRound} card${state.cardsThisRound !== 1 ? 's' : ''}${roundTypeLabel}`;
 
   if (state.trumpHidden) {
-    dom.trumpDisplay.innerHTML = '<span style="color:var(--gold)">Trump: Hidden (revealed after bidding)</span>';
+    dom.trumpDisplay.innerHTML = `
+      <div class="trump-label">Trump</div>
+      <div class="trump-hidden">?<br>Revealed<br>after bids</div>
+    `;
   } else if (state.trumpCard) {
-    dom.trumpDisplay.innerHTML = `Trump: <span style="color:var(--${state.trumpSuit})">${escHtml(state.trumpCard.rank)}${SUIT_SYMBOLS[state.trumpSuit]}</span>`;
+    dom.trumpDisplay.innerHTML = `
+      <div class="trump-label">Trump</div>
+      <div class="trump-card-large ${state.trumpSuit}">
+        <span class="card-rank">${escHtml(state.trumpCard.rank)}</span>
+        <span class="card-suit">${SUIT_SYMBOLS[state.trumpSuit]}</span>
+      </div>
+    `;
   } else {
-    dom.trumpDisplay.textContent = 'No Trump';
+    dom.trumpDisplay.innerHTML = `
+      <div class="trump-label">Trump</div>
+      <div class="trump-none">No<br>Trump</div>
+    `;
   }
 
   renderOtherPlayers(state);

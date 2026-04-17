@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Up and Down the River</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
   <!-- ───── JOIN / CREATE SCREEN ───── -->
@@ -47,13 +47,18 @@
       <div class="top-bar">
         <div class="round-info">
           <span id="round-label"></span>
-          <span id="trump-display"></span>
         </div>
+        <div class="game-title">Up-and-Down the River</div>
         <button id="btn-scoreboard" class="btn btn-small">Scoreboard</button>
       </div>
 
       <!-- Other players -->
       <div id="other-players" class="other-players"></div>
+
+      <!-- Trump display -->
+      <div id="trump-area" class="trump-area">
+        <div id="trump-display" class="trump-display-card"></div>
+      </div>
 
       <!-- Trick area -->
       <div id="trick-area" class="trick-area">

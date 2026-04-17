@@ -30,7 +30,7 @@ body {
   overflow-x: hidden;
 }
 
-.screen { display: none; min-height: 100vh; }
+.screen { display: none; min-height: 100vh; min-height: 100dvh; }
 .screen.active { display: flex; }
 
 /* ─── Buttons ──────────────────────────────────────────────────────────────── */
@@ -99,8 +99,9 @@ input[type="text"]:focus { border-color: var(--accent); }
 
 /* ─── Game Screen ──────────────────────────────────────────────────────────── */
 #screen-game {
-  flex-direction: column;
+  flex-direction: column; align-items: center;
   background: linear-gradient(180deg, #0a1628 0%, #1a1a2e 50%, #0d2137 100%);
+  max-height: 100vh; max-height: 100dvh; overflow: hidden;
 }
 .game-layout {
   display: flex; flex-direction: column; flex: 1;
@@ -115,6 +116,7 @@ input[type="text"]:focus { border-color: var(--accent); }
   margin-bottom: 8px;
 }
 .round-info { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+.game-title { font-weight: 700; font-size: 1.1rem; color: var(--gold); white-space: nowrap; }
 #trump-display { font-weight: 700; }
 
 /* Other players */
@@ -138,6 +140,47 @@ input[type="text"]:focus { border-color: var(--accent); }
 .opponent-details { font-size: 0.8rem; color: var(--text-dim); }
 .opponent-details span { display: inline-block; margin: 0 4px; }
 .disconnected { opacity: 0.4; }
+
+/* Trump area */
+.trump-area {
+  display: flex; justify-content: center; align-items: center;
+  margin: 14px auto; width: 100%;
+}
+.trump-display-card {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 8px;
+}
+.trump-label {
+  font-size: 1.1rem; color: var(--text-dim); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 2px;
+}
+.trump-card-large {
+  width: var(--card-width); height: var(--card-height);
+  background: var(--card-bg); border-radius: 8px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-weight: 700; border: 3px solid var(--gold);
+  box-shadow: 0 0 18px rgba(245, 197, 24, 0.5);
+}
+.trump-card-large .card-rank { font-size: 1.2rem; line-height: 1; }
+.trump-card-large .card-suit { font-size: 1.4rem; line-height: 1; }
+.trump-card-large.hearts { color: var(--hearts); }
+.trump-card-large.diamonds { color: var(--diamonds); }
+.trump-card-large.clubs { color: var(--clubs); }
+.trump-card-large.spades { color: var(--spades); }
+.trump-none {
+  width: var(--card-width); height: var(--card-height);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  border: 3px dashed var(--surface-light); color: var(--text-dim);
+  font-weight: 600; font-size: 0.9rem; text-align: center;
+}
+.trump-hidden {
+  width: var(--card-width); height: var(--card-height);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--surface) 25%, var(--surface-light) 25%, var(--surface-light) 50%, var(--surface) 50%, var(--surface) 75%, var(--surface-light) 75%);
+  background-size: 20px 20px;
+  border: 3px solid var(--gold); color: var(--gold);
+  font-weight: 700; font-size: 1.1rem; text-align: center;
+}
 
 /* Trick area */
 .trick-area {
@@ -270,9 +313,44 @@ input[type="text"]:focus { border-color: var(--accent); }
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
-  :root { --card-width: 56px; --card-height: 82px; }
+  :root { --card-width: 50px; --card-height: 72px; }
   .lobby-container h1 { font-size: 1.6rem; }
-  .opponent-card { min-width: 90px; padding: 8px 10px; }
-  .card .card-rank { font-size: 1rem; }
-  .card .card-suit { font-size: 1.1rem; }
+
+  .game-layout { padding: 6px 8px; }
+
+  .top-bar { padding: 4px 0; margin-bottom: 4px; }
+  .round-info { gap: 8px; font-size: 0.85rem; }
+  .game-title { font-size: 0.85rem; }
+
+  .other-players { gap: 6px; margin-bottom: 4px; }
+  .opponent-card { min-width: 80px; padding: 6px 8px; border-radius: 8px; }
+  .opponent-name { font-size: 0.8rem; margin-bottom: 2px; }
+  .opponent-details { font-size: 0.7rem; }
+
+  .trump-area { margin: 6px auto; }
+  .trump-label { font-size: 0.8rem; }
+  .trump-display-card { gap: 4px; }
+
+  .trick-area { min-height: 80px; }
+  .trick-cards { gap: 6px; }
+  .trick-card-label { font-size: 0.6rem; }
+  .trick-message { font-size: 0.9rem; margin-top: 4px; }
+
+  .card-mini { width: 42px; height: 60px; font-size: 0.75rem; }
+  .card-mini .card-rank { font-size: 0.8rem; }
+  .card-mini .card-suit { font-size: 0.9rem; }
+
+  .card .card-rank { font-size: 0.95rem; }
+  .card .card-suit { font-size: 1.05rem; }
+
+  .bid-area { padding: 6px 0; }
+  .bid-prompt { font-size: 0.9rem; margin-bottom: 6px; }
+  .bid-buttons { gap: 5px; }
+  .bid-buttons .btn { min-width: 36px; padding: 6px 10px; font-size: 0.85rem; }
+
+  .my-hand-area { padding-top: 6px; }
+  .my-info { gap: 10px; margin-bottom: 4px; font-size: 0.8rem; }
+  .my-hand { gap: 4px; padding-bottom: 6px; }
+
+  .btn-small { font-size: 0.75rem; padding: 4px 10px; }
 }
